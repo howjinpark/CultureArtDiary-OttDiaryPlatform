@@ -1,0 +1,72 @@
+/*
+.slick-slide {
+    margin: 0 10px;
+  }
+  
+  .slick-list {
+    margin: 0 -10px;
+  }
+  
+  .slick-track {
+    display: flex;
+  }
+  
+  .slick-prev,
+  .slick-next {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 25px;
+    color: #000;
+  }
+  */
+
+  /* 컨테이너 스타일 */
+.container {
+  width: 85%;
+  margin: 3rem auto;
+}
+
+/* 타이틀 스타일 */
+.title {
+  margin-bottom: 2rem;
+}
+
+.title-second {
+  margin-top: 2rem;
+}
+
+/* 카드 스타일 */
+.ant-card {
+  width: 180px;
+  margin-bottom: 16px;
+}
+
+.ant-card-cover img {
+  width: 100%;
+  height: auto;
+}
+
+/* 슬라이더 스타일 */
+.slick-prev, .slick-next {
+  z-index: 1;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: black;
+}
+
+/* 페이지네이션 버튼 스타일 */
+.pagination-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pagination-button {
+  margin: 0 5px;
+}
+
+  
