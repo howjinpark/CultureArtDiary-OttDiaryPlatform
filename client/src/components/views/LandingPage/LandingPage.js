@@ -12,7 +12,7 @@ const { Meta } = Card;
 function LandingPage() {
   const [Diary, setDiarys] = useState([]);
   const [movies, setMovies] = useState([]);
-  const [dramas, setDramas] = useState([]);
+  const [tvShows, setTvShows] = useState([]);
   const [currentPageDiary, setCurrentPageDiary] = useState(1);
   const itemsPerPage = 6;
   const apiKey = '50aaab29ad70cc1875e49e7512650e80';
@@ -44,23 +44,23 @@ function LandingPage() {
       }
     };
 
-    const fetchDramas = async () => {
+    const fetchTvShows = async () => {
       try {
         const url = `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=ko-KO&page=1`;
         const response = await fetch(url);
         const data = await response.json();
         if (data.results) {
-          setDramas(data.results);
+          setTvShows(data.results);
         } else {
-          console.error('Failed to fetch dramas:', data);
+          console.error('Failed to fetch TV shows:', data);
         }
       } catch (error) {
-        console.error('Error fetching dramas:', error);
+        console.error('Error fetching TV shows:', error);
       }
     };
 
     fetchMovies();
-    fetchDramas();
+    fetchTvShows();
   }, []);
 
   const renderItems = (items, currentPage) => {
@@ -140,18 +140,19 @@ function LandingPage() {
     </div>
   ));
 
-  const renderDramaCards = dramas.map((drama) => (
-    <div key={drama.id}>
+
+  const renderTvShowCards = tvShows.map((tvShow) => (
+    <div key={tvShow.id}>
       <Card
         hoverable
         style={{ width: 180, marginBottom: 16 }}
         cover={
-          <a href={`/detail/tv/${drama.id}`}>
-            <img alt={drama.title} src={`https://image.tmdb.org/t/p/w500${drama.poster_path}`} />
+          <a href={`/detail/tv/${tvShow.id}`}>
+            <img alt={tvShow.name} src={`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`} />
           </a>
         }
       >
-        <Meta title={drama.title} />
+        <Meta title={tvShow.name} />
       </Card>
     </div>
   ));
@@ -180,10 +181,10 @@ function LandingPage() {
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
         {renderPageNumbers(Diary.length, currentPageDiary, setCurrentPageDiary)}
       </div>
-      <Title level={2} style={{ marginTop: '2rem' }}>영화들</Title>
+      <Title level={2} style={{ marginTop: '2rem' }}>영화</Title>
       <Slider {...sliderSettings}>{renderMovieCards}</Slider>
-      <Title level={2} style={{ marginTop: '2rem' }}>드라마들</Title>
-      <Slider {...sliderSettings}>{renderDramaCards}</Slider>
+      <Title level={2} style={{ marginTop: '2rem' }}>TV 쇼</Title>
+      <Slider {...sliderSettings}>{renderTvShowCards}</Slider>
     </div>
   );
 }

@@ -6,7 +6,7 @@ export const PrivacyOptions = [
   
   export const CategoryOptions = [
     { value: 0, label: "Movie" },
-    { value: 1, label: "Drama" }
+    { value: 1, label: "TvShows" }
   ];
   
   export const GenreOptions = [

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Button, Form, message, Input, DatePicker, Select } from 'antd';
+import { Typography, Button, Form, message, Input, DatePicker, Select, Icon, Card, Divider } from 'antd';
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -8,54 +8,60 @@ import { GenreOptions, PrivacyOptions, CategoryOptions } from '../DiaryEditPage/
 const { TextArea } = Input;
 const { Title } = Typography;
 
+
+
 function DiaryUploadPage(props) {
     const user = useSelector(state => state.user);
     const [DiaryTitle, setDiaryTitle] = useState("");
     const [Description, setDescription] = useState("");
     const [Privacy, setPrivacy] = useState(0);
-    const [Category, setCategory] = useState("Film & Animation");
+    const [Category, setCategory] = useState("Movie & TvShow");
     const [DiaryDate, setDiaryDate] = useState(null);
     const [Genre, setGenre] = useState("");
     const [Rating, setRating] = useState(0);
-    const [FilePath, setFilePath] = useState(""); // 저장된 파일 경로 상태 추가
+    const [FilePath, setFilePath] = useState("");
+    const [Preview, setPreview] = useState("");  // 이미지 미리보기를 위한 상태
 
     const onTitleChange = (e) => {
-        setDiaryTitle(e.currentTarget.value);
+        setDiaryTitle(e.currentTarget.value)
     }
 
     const onDescriptionChange = (e) => {
-        setDescription(e.currentTarget.value);
+        setDescription(e.currentTarget.value)
     }
 
-    const onPrivacyChage = (e) => {
-        setPrivacy(e.currentTarget.value);
+    const onPrivacyChange = (value) => {
+        setPrivacy(value);
     }
 
-    const onCategoryChange = (e) => {
-        setCategory(e.currentTarget.value);
+    const onCategoryChange = (value) => {
+        setCategory(value);
     }
 
-    const onGenreChange = (e) => {
-        setGenre(e.currentTarget.value);
+    const onGenreChange = (value) => {
+        setGenre(value);
     }
-
     const onDrop = (files) => {
         let formData = new FormData();
-        const config = { headers: { 'content-type': 'multipart/form-data' } };
+        const config = { header: { 'content-type': 'multipart/form-data' } };
         formData.append("file", files[0]);
 
-        Axios.post('/api/diary/uploadImage', formData, config)
+        Axios.post('/api/diary/uploadfiles', formData, config)
             .then(response => {
                 if (response.data.success) {
-                    setFilePath(response.data.filePath); // 파일 경로 상태 업데이트
-                    message.success('Image uploaded successfully');
+                    console.log(response.data);
+                    setFilePath(response.data.url);
+
+                    // 이미지 미리보기 설정
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setPreview(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+
                 } else {
-                    message.error('Failed to upload image');
+                    alert('Failed to upload file!');
                 }
-            })
-            .catch(error => {
-                console.error('Error uploading image:', error);
-                message.error('Error uploading image');
             });
     };
 
@@ -76,106 +82,93 @@ function DiaryUploadPage(props) {
             genre: Genre,
             date: DiaryDate,
             rating: Rating,
-            filePath: FilePath // 이미지 경로 포함
+            filePath: FilePath
+
         };
 
         Axios.post('/api/diary/uploadDiary', variables)
-            .then(response => {
-                if (response.data.success) {
-                    message.success('Successfully uploaded the diary!');
-                    setTimeout(() => {
-                        props.history.push('/');
-                    }, 3000);
-                } else {
-                    alert('Failed to upload the diary!');
-                }
-            });
-    };
+        .then(response => {
+            if (response.data.success) {
+                message.success('성공적으로 업로드했습니다!');
+                setTimeout(() => {
+                    props.history.push('/');
+                }, 3000);
+            } else {
+                message.error('다이어리 업로드 실패!');
+            }
+        })
+        .catch(error => {
+            console.error('다이어리 업로드 중 오류 발생:', error);
+            message.error('다이어리 업로드 중 오류가 발생했습니다.');
+        });
+};
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}>Upload Diary</Title>
-            </div>
-
-            <Form onSubmit={onSubmit}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Dropzone onDrop={onDrop} multiple={false} maxSize={1000000000}>
-                        {({ getRootProps, getInputProps }) => (
-                            <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }} {...getRootProps()}>
-                                <input {...getInputProps()} />
-                                <p>Drag 'n' drop an image here, or click to select an image</p>
-                            </div>
-                        )}
-                    </Dropzone>
+            <Card style={{ borderRadius: 8 }}>
+                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                <Title level={2}>다이어리 업로드</Title>
                 </div>
-
-                {FilePath && (
-                    <div style={{ textAlign: 'center', margin: '20px' }}>
-                        <img src={`http://localhost:5000/${FilePath}`} alt="Uploaded" style={{ maxWidth: '100%' }} />
+                <Form onSubmit={onSubmit} layout="vertical">
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Dropzone onDrop={onDrop} multiple={false} maxSize={1000000000}>
+                            {({ getRootProps, getInputProps }) => (
+                                <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }} {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    <Icon type="plus" style={{ fontSize: '3rem' }} />
+                                </div>
+                            )}
+                        </Dropzone>
+                        {/* {File && <p>Selected File: {File.url}</p>} */}
+                        {Preview && (
+                         <img src={Preview} alt="Preview" style={{ width: '300px', height: '240px', objectFit: 'cover' }} />
+                        )}
                     </div>
-                )}
-
-<br />
-                <br />
-                <label>Title</label>
-                <Input onChange={onTitleChange} value={DiaryTitle} />
-                <br />
-                <br />
-                <label>Description</label>
-                <TextArea onChange={onDescriptionChange} value={Description} />
-                <br />
-                <br />
-
-                <label>Privacy</label>
-        <br />
-
-        <select onChange={onPrivacyChage}>
-                    {PrivacyOptions.map((item, index) => (
-                        <option key={index} value={item.value}>{item.label}</option>
-                    ))}
-        </select>
-
-                <br />
-                <br />
-                <label>Category</label>  
-        <br />              
-        <select onChange={onCategoryChange}>
-                    {CategoryOptions.map((item, index) => (                       
-                        <option key={index} value={item.value}>{item.label}</option>
-                    ))}
-
-        </select>
-
-                <br />
-                <br />
-                <label>Genre</label>     
-        <br />          
-        <select onChange={onGenreChange}>
-                    {GenreOptions.map((item, index) => (                       
-                        <option key={index} value={item.value}>{item.label}</option>
-                    ))}
-
-        </select>
-
-                <br />
-                <br />
-                <label>Date</label>
-                <DatePicker onChange={setDiaryDate} value={DiaryDate} />
-
-                <br />
-                <br />
-                <label>Rating</label>
-                <StarRating rating={Rating} setRating={setRating} />
-
-                <br />
-                <br />
-                <Button type="primary" size="large" onClick={onSubmit}>
-                    Submit
-                </Button>
-            </Form>
+                    <Divider />
+                    <Form.Item label="제목">
+                        <Input onChange={onTitleChange} value={DiaryTitle} />
+                    </Form.Item>
+                    <Form.Item label="설명">
+                        <TextArea onChange={onDescriptionChange} value={Description} rows={4} />
+                    </Form.Item>
+                    <Form.Item label="공개 설정">
+                        <Select value={Privacy} onChange={onPrivacyChange} style={{ width: '100%' }}>
+                            {PrivacyOptions.map((item, index) => (
+                                <option key={index} value={item.value}>{item.label}</option>
+                            ))}
+                        </Select >
+                    </Form.Item>
+                    <Form.Item label="카테고리">
+                        <Select value={Category} onChange={onCategoryChange} style={{ width: '100%' }}>
+                            {CategoryOptions.map((item, index) => (
+                                <option key={index} value={item.value}>{item.label}</option>
+                            ))}
+                        </Select >
+                    </Form.Item>
+                    <Form.Item label="장르">
+                        <Select value={Genre}  onChange={onGenreChange} style={{ width: '100%' }}>
+                            {GenreOptions.map((item, index) => (
+                                <option key={index} value={item.value}>{item.label}</option>
+                            ))}
+                        </Select >
+                    </Form.Item>
+                    <Form.Item label="날짜">
+                        <DatePicker onChange={date => setDiaryDate(date)} value={DiaryDate} style={{ width: '100%' }} />
+                    </Form.Item>
+                    <Form.Item label="평점">
+                        <StarRating rating={Rating} setRating={setRating} />
+                    </Form.Item>
+                    <Divider />
+                    <div style={{ textAlign: 'center' }}>
+                        <Button type="primary" size="large" onClick={onSubmit}>
+                            제출
+                        </Button>
+                    </div>
+                </Form>
+            </Card>
         </div>
     );
 }
 
 export default DiaryUploadPage;
+

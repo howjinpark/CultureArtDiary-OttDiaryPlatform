@@ -20,6 +20,7 @@ function DiaryEditPage(props) {
   const [Genre, setGenre] = useState(0);
   const [Rating, setRating] = useState(0);
   const [FilePath, setFilePath] = useState("");
+  const [Preview, setPreview] = useState("");  // 이미지 미리보기를 위한 상태
 
   useEffect(() => {
     Axios.post('/api/diary/getDiaryDetail', { diaryId })
@@ -33,6 +34,8 @@ function DiaryEditPage(props) {
           setGenre(genre);
           setRating(rating);
           setFilePath(filePath);
+          setPreview(`/${filePath}`);
+
         } else {
           alert('Failed to fetch diary details');
         }
@@ -70,6 +73,13 @@ function DiaryEditPage(props) {
       .then(response => {
         if (response.data.success) {
           setFilePath(response.data.url);
+          setPreview(`/${response.data.url}`);
+          // 이미지 미리보기 설정
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              setPreview(reader.result);
+          };
+          reader.readAsDataURL(files[0]);
         } else {
           alert('Failed to upload file');
         }
@@ -127,47 +137,47 @@ function DiaryEditPage(props) {
             {FilePath && (
               <div style={{ marginLeft: '2rem' }}>
                 <img
-                  src={`/${FilePath}`}
-                  alt="thumbnail"
+                  src={Preview}
+                  alt="Preview"
                   style={{ width: '300px', height: '240px', objectFit: 'cover', borderRadius: 8 }}
                 />
               </div>
             )}
           </div>
           <Divider />
-          <Form.Item label="Title">
+          <Form.Item label="제목">
             <Input onChange={onTitleChange} value={DiaryTitle} />
           </Form.Item>
-          <Form.Item label="Description">
+          <Form.Item label="설명">
             <TextArea onChange={onDescriptionChange} value={Description} rows={4} />
           </Form.Item>
-          <Form.Item label="Privacy">
+          <Form.Item label="공개 설정">
             <Select value={Privacy} onChange={onPrivacyChange} style={{ width: '100%' }}>
               {PrivacyOptions.map((item, index) => (
                 <Option key={index} value={item.value}>{item.label}</Option>
               ))}
             </Select>
           </Form.Item>
-          <Form.Item label="Category">
+          <Form.Item label="카테고리">
             <Select value={Category} onChange={onCategoryChange} style={{ width: '100%' }}>
               {CategoryOptions.map((item, index) => (
                 <Option key={index} value={item.value}>{item.label}</Option>
               ))}
             </Select>
           </Form.Item>
-          <Form.Item label="Genre">
+          <Form.Item label="장르">
             <Select value={Genre} onChange={onGenreChange} style={{ width: '100%' }}>
               {GenreOptions.map((item, index) => (
                 <Option key={index} value={item.value}>{item.label}</Option>
               ))}
             </Select>
           </Form.Item>
-          <Form.Item label="Rating">
+          <Form.Item label="평점">
             <StarRating rating={Rating} setRating={setRating} />
           </Form.Item>
           <Divider />
           <div style={{ textAlign: 'center' }}>
-            <Button type="primary" size="large" htmlType="submit">Submit</Button>
+          <Button type="primary" size="large" htmlType="submit">제출</Button>
           </div>
         </Form>
       </Card>

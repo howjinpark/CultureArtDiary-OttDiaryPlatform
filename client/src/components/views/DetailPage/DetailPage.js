@@ -65,16 +65,16 @@ const DetailPage = () => {
             <Divider />
 
             <List className="detail-list">
-              {renderDetailInfo('Original Title', details.original_title || details.original_name)}
-              {renderDetailInfo('Release Date', details.release_date || details.first_air_date)}
-              {renderDetailInfo('Genres', details.genres?.map((genre) => genre.name).join(', ') || 'N/A')}
-              {renderDetailInfo('Original Language', details.original_language)}
-              {renderDetailInfo('Popularity', details.popularity)}
-              {renderDetailInfo('Vote Average', details.vote_average)}
-              {renderDetailInfo('Vote Count', details.vote_count)}
-              {renderDetailInfo('Runtime', `${details.runtime || details.episode_run_time?.[0] || 'N/A'} minutes`)}
-              {renderDetailInfo('Status', details.status)}
-              {renderDetailInfo('Tagline', details.tagline)}
+              {renderDetailInfo('제목 ', details.original_title || details.original_name)}
+              {renderDetailInfo('개봉일', details.release_date || details.first_air_date)}
+              {renderDetailInfo('장르', details.genres?.map((genre) => genre.name).join(', ') || 'N/A')}
+              {renderDetailInfo('언어', details.original_language)}
+              {renderDetailInfo('인기도', details.popularity)}
+              {renderDetailInfo('평점', details.vote_average)}
+              {renderDetailInfo('투표 수', details.vote_count)}
+              {renderDetailInfo('상영 시간', `${details.runtime || details.episode_run_time?.[0] || 'N/A'} minutes`)}
+              {renderDetailInfo('상태', details.status)}
+              {renderDetailInfo('태그라인', details.tagline)}
             </List>
           </div>
         </div>
