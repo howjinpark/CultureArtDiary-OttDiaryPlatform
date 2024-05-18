@@ -39,11 +39,7 @@
   margin-top: 2rem;
 }
 
-/* 카드 스타일 */
-.ant-card {
-  width: 180px;
-  margin-bottom: 16px;
-}
+
 
 .ant-card-cover img {
   width: 100%;

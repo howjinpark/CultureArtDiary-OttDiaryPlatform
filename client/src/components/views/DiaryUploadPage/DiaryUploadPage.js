@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Button, Form, message, Input, DatePicker, Select, Icon } from 'antd';
+import { Typography, Button, Form, message, Input, DatePicker, Select } from 'antd';
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -7,8 +7,6 @@ import StarRating from './StarRating'; // 별점 컴포넌트 경로 확인
 import { GenreOptions, PrivacyOptions, CategoryOptions } from '../DiaryEditPage/Options';
 const { TextArea } = Input;
 const { Title } = Typography;
-
-
 
 function DiaryUploadPage(props) {
     const user = useSelector(state => state.user);
@@ -19,39 +17,45 @@ function DiaryUploadPage(props) {
     const [DiaryDate, setDiaryDate] = useState(null);
     const [Genre, setGenre] = useState("");
     const [Rating, setRating] = useState(0);
+    const [FilePath, setFilePath] = useState(""); // 저장된 파일 경로 상태 추가
 
     const onTitleChange = (e) => {
-        setDiaryTitle(e.currentTarget.value)
+        setDiaryTitle(e.currentTarget.value);
     }
 
     const onDescriptionChange = (e) => {
-        setDescription(e.currentTarget.value)
+        setDescription(e.currentTarget.value);
     }
 
     const onPrivacyChage = (e) => {
-        setPrivacy(e.currentTarget.value)
+        setPrivacy(e.currentTarget.value);
     }
 
     const onCategoryChange = (e) => {
-        setCategory(e.currentTarget.value)
+        setCategory(e.currentTarget.value);
     }
 
     const onGenreChange = (e) => {
-        setGenre(e.currentTarget.value)
+        setGenre(e.currentTarget.value);
     }
 
     const onDrop = (files) => {
         let formData = new FormData();
-        const config = { header: { 'content-type': 'multipart/form-data' } };
+        const config = { headers: { 'content-type': 'multipart/form-data' } };
         formData.append("file", files[0]);
 
-        Axios.post('/api/diary/uploadfiles', formData, config)
+        Axios.post('/api/diary/uploadImage', formData, config)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data);
+                    setFilePath(response.data.filePath); // 파일 경로 상태 업데이트
+                    message.success('Image uploaded successfully');
                 } else {
-                    alert('Failed to upload file!');
+                    message.error('Failed to upload image');
                 }
+            })
+            .catch(error => {
+                console.error('Error uploading image:', error);
+                message.error('Error uploading image');
             });
     };
 
@@ -71,18 +75,19 @@ function DiaryUploadPage(props) {
             category: Category,
             genre: Genre,
             date: DiaryDate,
-            rating: Rating
+            rating: Rating,
+            filePath: FilePath // 이미지 경로 포함
         };
 
         Axios.post('/api/diary/uploadDiary', variables)
             .then(response => {
                 if (response.data.success) {
-                    message.success('성공적으로 업로드를 했습니다!')
+                    message.success('Successfully uploaded the diary!');
                     setTimeout(() => {
                         props.history.push('/');
                     }, 3000);
                 } else {
-                    alert('다이어리 업로드에 실패했습니다!')
+                    alert('Failed to upload the diary!');
                 }
             });
     };
@@ -99,13 +104,19 @@ function DiaryUploadPage(props) {
                         {({ getRootProps, getInputProps }) => (
                             <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }} {...getRootProps()}>
                                 <input {...getInputProps()} />
-                                <Icon type="plus" style={{ fontSize: '3rem' }} />
+                                <p>Drag 'n' drop an image here, or click to select an image</p>
                             </div>
                         )}
                     </Dropzone>
                 </div>
 
-                <br />
+                {FilePath && (
+                    <div style={{ textAlign: 'center', margin: '20px' }}>
+                        <img src={`http://localhost:5000/${FilePath}`} alt="Uploaded" style={{ maxWidth: '100%' }} />
+                    </div>
+                )}
+
+<br />
                 <br />
                 <label>Title</label>
                 <Input onChange={onTitleChange} value={DiaryTitle} />

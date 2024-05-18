@@ -15,7 +15,7 @@ import UserPage from './views/UserPage/UserPage';
 import EditProfilePage from './views/UserPage/EditProfilePage';
 import DetailPage from './views/DetailPage/DetailPage';
 import CalendarPage from './views/CalenderPage/CalenderPage';
-import RecommendedVideoPage from './views/RecommendedVideoPage/RecommendedVideoPage';
+
 
 // null: 누구나 접근 가능
 // true: 로그인한 사용자만 접근 가능
@@ -37,7 +37,7 @@ function App() {
           <Route exact path="/diary/edit/:diaryId" component={Auth(DiaryEditPage, true)} />
           <Route exact path="/detail/:type/:id" component={Auth(DetailPage, null)} />
           <Route exact path="/calender" component={Auth(CalendarPage, null)} />
-          <Route exact path="/recommendVideo" component={Auth(RecommendedVideoPage, true)} />
+          
 
         </Switch>
       </div>

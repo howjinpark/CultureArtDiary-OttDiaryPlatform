@@ -4,26 +4,38 @@ const router = express.Router();
 const { Diary } = require("../models/Diary");
 const { auth } = require("../middleware/auth");
 const multer = require("multer");
-
+const path = require("path");
 
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/");
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_${file.originalname}`);
-    },
-    fileFilter: (req, file, cb) => {
-        const ext = path.extname(file.originalname)
-        if (ext !== '.mp4' || ext !== '.png') {
-            return cb(res.status(400).end('only png, mp4 is allowed'), false);
-        }
-        cb(null, true)
-    }
+  destination: function(req, file, cb) {
+      cb(null, "uploads/"); // 파일이 저장될 경로
+  },
+  filename: function(req, file, cb) {
+      cb(null, `${Date.now()}_${file.originalname}`); // 파일 이름 설정
+  }
 });
 
-const upload = multer({ storage: storage }).single("file");
+const fileFilter = (req, file, cb) => {
+  // 허용할 이미지 형식
+  const allowedTypes = ['.jpg', '.jpeg', '.png'];
+  const ext = path.extname(file.originalname).toLowerCase();
+  if (!allowedTypes.includes(ext)) {
+      return cb(new Error('Only image files are allowed'), false);
+  }
+  cb(null, true);
+};
+
+const upload = multer({ storage: storage, fileFilter: fileFilter });
+
+// 파일 업로드 엔드포인트
+router.post('/uploadImage', upload.single('file'), (req, res) => {
+  if (!req.file) {
+      return res.status(400).json({ success: false, message: 'No file uploaded' });
+  }
+  const filePath = req.file.path; // 저장된 파일의 경로
+  return res.json({ success: true, filePath: filePath });
+});
 
 //=================================
 //             Video
@@ -45,19 +57,20 @@ router.post('/uploadfiles', (req, res) => {
 
 // 일기 업로드 엔드포인트
 router.post('/uploadDiary', (req, res) => {
-    const diary = new Diary({
-      ...req.body,
-      privacy: parseInt(req.body.privacy, 10),
-      category: parseInt(req.body.category, 10),
-      genre: parseInt(req.body.genre, 10),
-      rating: parseInt(req.body.rating, 10)
-    });
-  
-    diary.save((err, doc) => {
-      if (err) return res.json({ success: false, err });
-      res.status(200).json({ success: true });
-    });
+  const diary = new Diary({
+    ...req.body,
+    privacy: parseInt(req.body.privacy, 10),
+    category: parseInt(req.body.category, 10),
+    genre: parseInt(req.body.genre, 10),
+    rating: parseInt(req.body.rating, 10),
+    filePath: req.body.filePath // 이미지 파일 경로 저장
   });
+
+  diary.save((err, doc) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, doc });
+  });
+});
   
 // 일기 상세 정보 엔드포인트
 router.post("/getDiaryDetail", (req, res) => {
