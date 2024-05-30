@@ -1,0 +1,96 @@
+.slick-slide {
+  margin: 0 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+.slick-track {
+  display: flex;
+}
+
+.slick-prev,
+.slick-next {
+  width: 25px;
+  height: 25px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 25px;
+  color: #000;
+}
+
+/* 컨테이너 스타일 */
+.container {
+  width: 85%;
+  margin: 3rem auto;
+}
+
+/* 타이틀 스타일 */
+.title {
+  margin-bottom: 2rem;
+}
+
+.title-second {
+  margin-top: 2rem;
+}
+
+.ant-card-cover img {
+  width: 100%;
+  height: auto;
+}
+
+/* 슬라이더 스타일 */
+.slick-prev, .slick-next {
+  z-index: 1;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: black;
+}
+
+/* 페이지네이션 버튼 스타일 */
+.pagination-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pagination-button {
+  margin: 0 5px;
+}
+
+/* LandingPage Background 스타일 */
+.landing-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-page::before,
+.landing-page::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 1;
+}
+
+.landing-page::before {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  left: -50px;
+}
+
+.landing-page::after {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  right: -50px;
+}

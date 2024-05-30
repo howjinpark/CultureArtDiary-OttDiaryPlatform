@@ -5,10 +5,11 @@ import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
 
 interface StarRatingProps {
   rating: number;
-  setRating: (rating: number) => void;
+  setRating?: (rating: number) => void; // setRating를 선택적으로 변경
+  readOnly?: boolean; // readOnly 속성 추가
 }
 
-const StarRating: React.FC<StarRatingProps> = ({ rating, setRating }) => {
+const StarRating: React.FC<StarRatingProps> = ({ rating, setRating, readOnly = false }) => {
   const [hover, setHover] = useState<number>(0);
 
   return (
@@ -16,17 +17,17 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, setRating }) => {
       {[...Array(5)].map((_, index) => {
         const ratingValue = index + 1;
         return (
-          <label 
-            key={index} 
-            style={{ cursor: 'pointer', margin: '0 2px' }} // Adjust margin to ensure minimal gap
-            onMouseEnter={() => setHover(ratingValue)}
-            onMouseLeave={() => setHover(0)}
+          <label
+            key={index}
+            style={{ cursor: readOnly ? 'default' : 'pointer', margin: '0 2px' }} // readOnly일 때 커서 기본값
+            onMouseEnter={() => !readOnly && setHover(ratingValue)} // readOnly일 때 hover 비활성화
+            onMouseLeave={() => !readOnly && setHover(0)} // readOnly일 때 hover 비활성화
           >
             <input
               type="radio"
               name="rating"
               value={ratingValue}
-              onClick={() => setRating(ratingValue)}
+              onClick={() => !readOnly && setRating && setRating(ratingValue)} // readOnly일 때 클릭 비활성화
               style={{ display: 'none' }}
             />
             {ratingValue <= (hover || rating) ? (
@@ -40,4 +41,5 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, setRating }) => {
     </div>
   );
 };
+
 export default StarRating;

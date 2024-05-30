@@ -5,6 +5,7 @@ import Axios from 'axios';
 import { useSelector } from 'react-redux';
 import StarRating from '../DiaryUploadPage/StarRating';
 import { PrivacyOptions, CategoryOptions, GenreOptions } from './Options';
+import './DiaryEditPage.css';  // Import the CSS file
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -35,7 +36,6 @@ function DiaryEditPage(props) {
           setRating(rating);
           setFilePath(filePath);
           setPreview(`/${filePath}`);
-
         } else {
           alert('Failed to fetch diary details');
         }
@@ -115,72 +115,74 @@ function DiaryEditPage(props) {
   };
 
   return (
-    <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-      <Card style={{ borderRadius: 8 }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Title level={2}>다이어리 수정</Title>
-        </div>
-        <Form onSubmit={onSubmit} layout="vertical">
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Dropzone
-              onDrop={onDrop}
-              multiple={false}
-              maxSize={1000000000}
-            >
-              {({ getRootProps, getInputProps }) => (
-                <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }} {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <Icon type="plus" style={{ fontSize: '3rem' }} />
+    <div className="diary-edit-page">
+      <div className="diary-edit-container">
+        <Card className="diary-edit-card">
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <Title level={2}>다이어리 수정</Title>
+          </div>
+          <Form onSubmit={onSubmit} layout="vertical">
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Dropzone
+                onDrop={onDrop}
+                multiple={false}
+                maxSize={1000000000}
+              >
+                {({ getRootProps, getInputProps }) => (
+                  <div className="dropzone" {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <Icon type="plus" style={{ fontSize: '3rem' }} />
+                  </div>
+                )}
+              </Dropzone>
+              {FilePath && (
+                <div className="image-preview-container">
+                  <img
+                    src={Preview}
+                    alt="Preview"
+                    className="image-preview"
+                  />
                 </div>
               )}
-            </Dropzone>
-            {FilePath && (
-              <div style={{ marginLeft: '2rem' }}>
-                <img
-                  src={Preview}
-                  alt="Preview"
-                  style={{ width: '300px', height: '240px', objectFit: 'cover', borderRadius: 8 }}
-                />
-              </div>
-            )}
-          </div>
-          <Divider />
-          <Form.Item label="제목">
-            <Input onChange={onTitleChange} value={DiaryTitle} />
-          </Form.Item>
-          <Form.Item label="설명">
-            <TextArea onChange={onDescriptionChange} value={Description} rows={4} />
-          </Form.Item>
-          <Form.Item label="공개 설정">
-            <Select value={Privacy} onChange={onPrivacyChange} style={{ width: '100%' }}>
-              {PrivacyOptions.map((item, index) => (
-                <Option key={index} value={item.value}>{item.label}</Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item label="카테고리">
-            <Select value={Category} onChange={onCategoryChange} style={{ width: '100%' }}>
-              {CategoryOptions.map((item, index) => (
-                <Option key={index} value={item.value}>{item.label}</Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item label="장르">
-            <Select value={Genre} onChange={onGenreChange} style={{ width: '100%' }}>
-              {GenreOptions.map((item, index) => (
-                <Option key={index} value={item.value}>{item.label}</Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item label="평점">
-            <StarRating rating={Rating} setRating={setRating} />
-          </Form.Item>
-          <Divider />
-          <div style={{ textAlign: 'center' }}>
-          <Button type="primary" size="large" htmlType="submit">제출</Button>
-          </div>
-        </Form>
-      </Card>
+            </div>
+            <Divider />
+            <Form.Item label="제목">
+              <Input onChange={onTitleChange} value={DiaryTitle} />
+            </Form.Item>
+            <Form.Item label="설명">
+              <TextArea onChange={onDescriptionChange} value={Description} rows={4} />
+            </Form.Item>
+            <Form.Item label="공개 설정">
+              <Select value={Privacy} onChange={onPrivacyChange} style={{ width: '100%' }}>
+                {PrivacyOptions.map((item, index) => (
+                  <Option key={index} value={item.value}>{item.label}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item label="카테고리">
+              <Select value={Category} onChange={onCategoryChange} style={{ width: '100%' }}>
+                {CategoryOptions.map((item, index) => (
+                  <Option key={index} value={item.value}>{item.label}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item label="장르">
+              <Select value={Genre} onChange={onGenreChange} style={{ width: '100%' }}>
+                {GenreOptions.map((item, index) => (
+                  <Option key={index} value={item.value}>{item.label}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item label="평점">
+              <StarRating rating={Rating} setRating={setRating} />
+            </Form.Item>
+            <Divider />
+            <div style={{ textAlign: 'center' }}>
+              <Button type="primary" size="large" htmlType="submit">제출</Button>
+            </div>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 }

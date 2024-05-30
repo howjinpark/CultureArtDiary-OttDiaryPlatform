@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, Avatar, Typography, Button, Row, Col } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
 import Slider from 'react-slick';
-import './LandginPage.css'; // 스타일을 위한 CSS 파일 추가
+import './LandingPage.css'; // 스타일을 위한 CSS 파일 추가
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -140,7 +139,6 @@ function LandingPage() {
     </div>
   ));
 
-
   const renderTvShowCards = tvShows.map((tvShow) => (
     <div key={tvShow.id}>
       <Card
@@ -165,7 +163,7 @@ function LandingPage() {
           key={i}
           type={i === currentPage ? 'primary' : 'default'}
           onClick={() => setCurrentPage(i)}
-          style={{ margin: '0 5px' }}
+          className="pagination-button"
         >
           {i}
         </Button>
@@ -175,21 +173,18 @@ function LandingPage() {
   };
 
   return (
-    <div style={{ width: '85%', margin: '3rem auto' }}>
-      <Title level={2}>게시글</Title>
+    <div className="container">
+      <Title level={2} className="title">게시글</Title>
       <Row gutter={[16, 16]}>{renderDiaryCards}</Row>
-      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <div className="pagination-container">
         {renderPageNumbers(Diary.length, currentPageDiary, setCurrentPageDiary)}
       </div>
-      <Title level={2} style={{ marginTop: '2rem' }}>영화</Title>
+      <Title level={2} className="title-second">영화</Title>
       <Slider {...sliderSettings}>{renderMovieCards}</Slider>
-      <Title level={2} style={{ marginTop: '2rem' }}>TV 쇼</Title>
+      <Title level={2} className="title-second">TV 쇼</Title>
       <Slider {...sliderSettings}>{renderTvShowCards}</Slider>
     </div>
   );
 }
 
 export default LandingPage;
-
-
-

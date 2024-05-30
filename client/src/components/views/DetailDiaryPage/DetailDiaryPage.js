@@ -3,7 +3,8 @@ import { Card, Avatar, Typography, Divider, Button, Row, Col } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
 import { PrivacyOptions, CategoryOptions, GenreOptions } from '../DiaryEditPage/Options';
-
+import './DetailDiaryPage.css';  // Import the CSS file
+import StarRating from '../DiaryUploadPage/StarRating';
 const { Title, Paragraph, Text } = Typography;
 
 function DetailDiaryPage(props) {
@@ -66,63 +67,66 @@ function DetailDiaryPage(props) {
 
   if (!DiaryDetail || !userData) {
     return (
-      <div style={{ width: '85%', margin: '3rem auto', textAlign: 'center' }}>
+      <div className="loading-container">
         <Paragraph>Loading...</Paragraph>
       </div>
     );
   }
 
   return (
-    <div style={{ width: '85%', margin: '3rem auto' }}>
-      <Card
-        style={{ borderRadius: 8 }}
-        title={
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar src={DiaryDetail.writer.image} size={64} />
-            <div style={{ marginLeft: '1rem' }}>
-              <Title level={3} style={{ marginBottom: 0 }}>{DiaryDetail.writer.name}</Title>
-              <Paragraph type="secondary">{moment(DiaryDetail.createdAt).format('YYYY-MM-DD HH:mm')}</Paragraph>
+    <div className="diary-detail-page">
+      <div className="diary-detail-container">
+        <Card
+          className="diary-detail-card"
+          title={
+            <div className="card-header">
+              <Avatar src={DiaryDetail.writer.image} size={64} />
+              <div className="card-header-text">
+                <Title level={3} style={{ marginBottom: 0 }}>{DiaryDetail.writer.name}</Title>
+                <Paragraph type="secondary">{moment(DiaryDetail.createdAt).format('YYYY-MM-DD HH:mm')}</Paragraph>
+              </div>
             </div>
-          </div>
-        }
-      >
-        <Title level={2} style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '1rem' }}>{DiaryDetail.title}</Title>
-        {DiaryDetail.filePath && (
-          <img src={`http://localhost:5000/${DiaryDetail.filePath}`} alt="Diary" style={{ maxWidth: '100%', marginBottom: '1rem' }} />
-        )}
-        <Divider />
-        <Paragraph style={{ fontSize: '16px', lineHeight: '1.6' }}>
-          {DiaryDetail.description}
-        </Paragraph>
-        <Divider />
-        <Row gutter={[16, 8]}>
-          <Col span={12}>
-          <Text strong>공개 설정:</Text> {getLabel(PrivacyOptions, DiaryDetail.privacy)}
-          </Col>
-          <Col span={12}>
-          <Text strong>카테고리:</Text> {getLabel(CategoryOptions, DiaryDetail.category)}
-          </Col>
-        </Row>
-        <Row gutter={[16, 8]}>
-          <Col span={12}>
-          <Text strong>장르:</Text> {getLabel(GenreOptions, DiaryDetail.genre)}
-          </Col>
-          <Col span={12}>
-          <Text strong>평점:</Text> {DiaryDetail.rating}
-          </Col>
-        </Row>
-        <Divider />
-        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-          <Button type="primary" style={{ marginRight: '10px' }} href="/">목록으로 돌아가기</Button>
-          {DiaryDetail.writer._id === userData._id && (
-              <Button type="default" onClick={handleDelete}>삭제</Button>
-            )}
-
-          {DiaryDetail.writer._id === userData._id && (
-            <Button type="default" href={`/diary/edit/${DiaryDetail._id}`}>수정</Button>
+          }
+        >
+          <Title level={2} className="diary-title">{DiaryDetail.title}</Title>
+          {DiaryDetail.filePath && (
+            <img src={`http://localhost:5000/${DiaryDetail.filePath}`} alt="Diary" className="diary-image" />
           )}
-        </div>
-      </Card>
+          <Divider />
+          <Paragraph className="diary-description">
+            {DiaryDetail.description}
+          </Paragraph>
+          <Divider />
+          <Row gutter={[16, 8]}>
+            <Col span={12}>
+              <Text strong>공개 설정:</Text> {getLabel(PrivacyOptions, DiaryDetail.privacy)}
+            </Col>
+            <Col span={12}>
+              <Text strong>카테고리:</Text> {getLabel(CategoryOptions, DiaryDetail.category)}
+            </Col>
+          </Row>
+          <Row gutter={[16, 8]}>
+            <Col span={12}>
+              <Text strong>장르:</Text> {getLabel(GenreOptions, DiaryDetail.genre)}
+            </Col>
+            <Col span={12}>
+              <Text strong>평점:</Text>
+              <StarRating rating={DiaryDetail.rating} readOnly /> {/* Use the StarRating component */}
+            </Col>
+          </Row>
+          <Divider />
+          <div className="action-buttons">
+            <Button type="primary" style={{ marginRight: '10px' }} href="/">목록으로 돌아가기</Button>
+            {DiaryDetail.writer._id === userData._id && (
+                <Button type="default" onClick={handleDelete}>삭제</Button>
+              )}
+
+            {DiaryDetail.writer._id === userData._id && (
+              <Button type="default" href={`/diary/edit/${DiaryDetail._id}`}>수정</Button>
+            )}
+          </div>
+        </Card>
+      </div>
     </div>
   );
 }

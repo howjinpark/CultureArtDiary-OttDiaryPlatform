@@ -1,5 +1,3 @@
-// src/pages/EditProfilePage/EditProfilePage.js
-
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -15,13 +13,14 @@ const EditProfilePage = () => {
     profilePhoto: ''
   });
   const [profilePic, setProfilePic] = useState(null);
+  const [preview, setPreview] = useState("");  // 이미지 미리보기를 위한 상태
   const history = useHistory();
 
   // 사용자의 정보를 불러오는 함수
   const fetchUserProfile = async () => {
     try {
-        const response = await axios.get('/api/users/auth');
-        if (response.status === 200) {
+      const response = await axios.get('/api/users/auth');
+      if (response.status === 200) {
         const userData = response.data;
         setUser({
           nickname: userData.name,
@@ -46,10 +45,17 @@ const EditProfilePage = () => {
       const file = e.target.files[0];
       const formData = new FormData();
       formData.append('profilePhoto', file);
+      
+      // 이미지 미리보기 설정
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
 
       try {
         const response = await axios.post('/api/users/upload-profile-photo', formData, {
-            headers: {
+          headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
@@ -103,83 +109,86 @@ const EditProfilePage = () => {
       console.error('프로필 수정 실패:', err);
     }
   };
-  
+
   return (
-    <div className="edit-profile-container">
-      <div className="edit-profile-header">
-        <h1>프로필 수정</h1>
-        <p>프로필 정보를 수정하고 저장하세요.</p>
-      </div>
-
-      <div className="profile-section">
-        <h2 className="profile-title">프로필 정보</h2>
-        <div className="profile-info">
-          <div className="profile-pic-container">
-            {user.profilePhoto ? (
-              <img src={user.profilePhoto} alt="Profile" className="profile-pic" />
-            ) : (
-              <div className="default-profile-pic">
-                <i className="fas fa-user-circle"></i>
+    <div className="edit-profile-page">
+      <div className="edit-profile-container">
+        <div className="edit-profile-header">
+          <h1>프로필 수정</h1>
+          <p>프로필 정보를 수정하고 저장하세요.</p>
+        </div>
+        <div className="profile-section">
+          <h2 className="profile-title">프로필 정보</h2>
+          <div className="profile-info">
+            <div className="profile-pic-container">
+              {user.profilePhoto ? (
+                <img src={user.profilePhoto} alt="Profile" className="profile-pic" />
+              ) : (
+                <div className="default-profile-pic">
+                  <i className="fas fa-user-circle"></i>
+                </div>
+              )}
+              <div className="file-input-container">
+                <input type="file" accept="image/*" onChange={handleProfilePicChange} />
               </div>
-            )}
-            <div className="file-input-container">
-              <input type="file" accept="image/*" onChange={handleProfilePicChange} />
+              {preview && (
+                <img src={preview} alt="Profile Preview" className="profile-pic-preview" />
+              )}
             </div>
-          </div>
-          <div className="user-info">
-            <label>
-              <span>이름:</span>
-              <input
-                type="text"
-                name="nickname"
-                value={user.nickname}
-                onChange={handleProfileChange}
-              />
-            </label>
-            <label>
-              <span>성별:</span>
-              <select
-                name="gender"
-                value={user.gender}
-                onChange={handleProfileChange}
-              >
-                {GenderOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              <span>태어난 해:</span>
-              <select
-                name="birthYear"
-                value={user.birthYear}
-                onChange={handleProfileChange}
-              >
-                {Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i).map(year => (
-                  <option key={year} value={String(year)}>{year}</option>
-                ))}
-              </select>
-            </label>
-            <label>
-              <span>장르:</span>
-              <div className="genre-checkbox-group">
-                {GenreOptions.map(option => (
-                  <label key={option.value} className="genre-checkbox">
-                    <input
-                      type="checkbox"
-                      value={option.value}
-                      checked={user.genre.includes(option.label)}
-                      onChange={handleGenreChange}
-                    />
-                    {option.label}
-                  </label>
-                ))}
-              </div>
-            </label>
-
-            <button onClick={handleProfileSave} className="save-button">저장</button>
+            <div className="user-info">
+              <label>
+                <span>이름:</span>
+                <input
+                  type="text"
+                  name="nickname"
+                  value={user.nickname}
+                  onChange={handleProfileChange}
+                />
+              </label>
+              <label>
+                <span>성별:</span>
+                <select
+                  name="gender"
+                  value={user.gender}
+                  onChange={handleProfileChange}
+                >
+                  {GenderOptions.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span>태어난 해:</span>
+                <select
+                  name="birthYear"
+                  value={user.birthYear}
+                  onChange={handleProfileChange}
+                >
+                  {Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i).map(year => (
+                    <option key={year} value={String(year)}>{year}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span>장르:</span>
+                <div className="genre-checkbox-group">
+                  {GenreOptions.map(option => (
+                    <label key={option.value} className="genre-checkbox">
+                      <input
+                        type="checkbox"
+                        value={option.value}
+                        checked={user.genre.includes(option.label)}
+                        onChange={handleGenreChange}
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+              </label>
+              <button onClick={handleProfileSave} className="save-button">저장</button>
+            </div>
           </div>
         </div>
       </div>
