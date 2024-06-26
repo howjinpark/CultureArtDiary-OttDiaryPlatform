@@ -57,6 +57,19 @@
 |:---:|
 |백엔드|
 
+## 실행 오류 해결방안
+✔ **CalenderPage** 버전 이슈로 실행 오류가 뜰 수 있다. <br>
+cd client 후 <br>
+npm install @fullcalendar/react @fullcalendar/daygrid <br>
+npm install @fullcalendar/interaction <br>
+npm install @mui/material @emotion/react @emotion/styled --legacy-peer-deps <br>
+npm install typescript --legacy-peer-deps <br>
+
+✔ **RecommendedVideoPage** 파일에 js파일을 넣지 않아서 오류가 뜰 수 있다. (Chatgpt 키 값 이슈로 js파일을 가림) <br>
+RecommendedVideoPage.js 파일을 직접 만들어서 넣는다. <br>
+혹은 RecommendedVideoPage파일을 삭제한다. <br>
+
+
 ## 사용된 기술 스택
 
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
