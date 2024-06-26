@@ -11,6 +11,17 @@
 ✔ **개인 프로필 관리**: 개인 프로필을 만들고 관심사를 설정할 수 있습니다. <br>
 ✔ **문화 예술 콘텐츠 맞춤 추천**: 키워드 검색을 통해 맞춤 OTT 콘텐츠를 추천 받을 수 있습니다. (ChatGPT 활용)
 
+## server 설명
+✔ server/config/dev.js은 MongoDB URI를 설정합니다. (해당 파일은 .gitignore파일로 가려져있음)
+✔ server/middleware/auth.js은 사용자 인증을 위한 미들웨어입니다.
+✔ server/models/Diary.js은 다이어리 모델을 정의하는 파일입니다.
+✔ server/models/User.js은 유저 모델을 정의하는 파일입니다.
+✔ server/routes/diary.js은 다이어리 관련 API 엔드포인트를 정의하는 파일입니다.
+✔ server/routes/users.js은 유저 관련 API 엔드포인트를 정의하는 파일입니다.
+✔ server/index.js은 서버의 엔트리 포인트 파일입니다.
+
+**서버**는 Node.js와 Express를 사용하여 사용자 인증, 파일 업로드 및 다이어 관리 기능을 제공합니다.
+
 ## 누가 만들었나요?
 ### ✨ 프론트엔드
 |김형민|
