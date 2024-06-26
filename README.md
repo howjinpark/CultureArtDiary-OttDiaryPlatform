@@ -69,7 +69,7 @@ Multer를 이용해 이미지 파일을 서버에 저장. <br>
 
 ## server 주요 코드 설명
 
-**index.js**
+**index.js** <br>
 Express 애플리케이션을 설정하고 MongoDB에 연결. <br>
 미들웨어로 body-parser와 cookie-parser 설정. <br>
 사용자 관련 라우트와 일기 관련 라우트를 설정. <br>
