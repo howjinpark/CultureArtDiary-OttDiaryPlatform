@@ -8,9 +8,13 @@
 
 ## 주요 기능
 ✔ **회원가입 및 로그인**: 회원 가입 및 로그인을 통해 개인 웹사이트를 이용할 수 있습니다. <br> <br>
-|<img src="https://github.com/user-attachments/assets/310d2de6-dd0c-4d46-81ae-850ed263000c" width="300"/>|
+|<img src="https://github.com/user-attachments/assets/310d2de6-dd0c-4d46-81ae-850ed263000c" width="300"/>| 
 |:---:|
 |회원가입|
+
+|<img src="https://github.com/user-attachments/assets/a65ff3f5-d600-4d2c-afe8-069e43735ec4" width="300"|
+|:---:|
+|로그인|
 
 ✔ **개인 다이어리 작성 및 수정**: 다른 사람들의 감상 후기를 확인하고 내 후기도 다른 사람과 공유할 수 있습니다. <br>
 ✔ **문화 예술 콘텐츠 탐색**: 추천하는 다양한 OTT 콘텐츠를 탐색하고 정보를 제공 받을 수 있습니다. <br>
