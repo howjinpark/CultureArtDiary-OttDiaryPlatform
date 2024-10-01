@@ -12,31 +12,32 @@
 |:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/310d2de6-dd0c-4d46-81ae-850ed263000c" width="300"/> | <img src="https://github.com/user-attachments/assets/a65ff3f5-d600-4d2c-afe8-069e43735ec4" width="300"/> |
 
-
-✔ **개인 다이어리 작성 및 수정**: 다른 사람들의 감상 후기를 확인하고 내 후기도 다른 사람과 공유할 수 있습니다. <br><br> 
+<br><br> 
+✔ **개인 다이어리 작성 및 수정**: 다른 사람들의 감상 후기를 확인하고 내 후기도 다른 사람과 공유할 수 있습니다. 
 | 다이어리 작성 | 다이어리 수정 |
 |:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/c47512e2-c656-450f-86a9-b8b51d269a62" width="300"/> | <img src="https://github.com/user-attachments/assets/94c8c149-66aa-4242-91f5-9252afe9b31b" width="300"/> |
 
-
-✔ **문화 예술 콘텐츠 탐색**: 추천하는 다양한 OTT 콘텐츠를 탐색하고 정보를 제공 받을 수 있습니다. <br><br> 
+<br><br> 
+✔ **문화 예술 콘텐츠 탐색**: 추천하는 다양한 OTT 콘텐츠를 탐색하고 정보를 제공 받을 수 있습니다. 
 | 콘텐츠 탐색 | 콘텐츠 상세정보 |
 |:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/65d721fc-95d9-4f84-afa9-7a057214d475" width="300"/> | <img src="https://github.com/user-attachments/assets/6ed6a9a3-264b-4a67-8670-9168400d94ca" width="300"/> |
 
-
-✔ **캘린더 관리**: 캘린더를 통해 원하는 콘텐츠 알림을 받고 일정 관리를 할 수 있습니다. <br><br> 
+<br><br> 
+✔ **캘린더 관리**: 캘린더를 통해 원하는 콘텐츠 알림을 받고 일정 관리를 할 수 있습니다. 
 |<img src="https://github.com/user-attachments/assets/d7a26840-08ea-4187-a852-d4789f1703a7" width="300"/>|
 |:---:|
 |캘린더|
 
-✔ **개인 프로필 관리**: 개인 프로필을 만들고 관심사를 설정할 수 있습니다. <br><br> 
+<br><br> 
+✔ **개인 프로필 관리**: 개인 프로필을 만들고 관심사를 설정할 수 있습니다. 
 | 프로필 | 프로필 수정 |
 |:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/063f6e0e-9399-46e4-884b-8c46b2176ae1" width="300"/> | <img src="https://github.com/user-attachments/assets/05bfe17c-13a7-4c69-90d0-4fd3874d1e5f" width="300"/> |
 
-
-✔ **문화 예술 콘텐츠 맞춤 추천**: 키워드 검색을 통해 맞춤 OTT 콘텐츠를 추천 받을 수 있습니다. (ChatGPT 활용) <br><br> 
+<br><br> 
+✔ **문화 예술 콘텐츠 맞춤 추천**: 키워드 검색을 통해 맞춤 OTT 콘텐츠를 추천 받을 수 있습니다. (ChatGPT 활용) 
 |콘텐츠 추천|
 |:---:|
 |<img src="https://github.com/user-attachments/assets/c6a9c78c-44e3-42e2-b244-975114925b1a" width="300"/>|
