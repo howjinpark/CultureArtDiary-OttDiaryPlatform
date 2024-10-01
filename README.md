@@ -12,7 +12,7 @@
 |:---:|
 |회원가입|
 
-|<img src="https://github.com/user-attachments/assets/a65ff3f5-d600-4d2c-afe8-069e43735ec4" width="300"|
+|<img src="https://github.com/user-attachments/assets/a65ff3f5-d600-4d2c-afe8-069e43735ec4" width="300"/>|
 |:---:|
 |로그인|
 
