@@ -8,7 +8,7 @@
 
 ## 주요 기능
 ✔ **회원가입 및 로그인**: 회원 가입 및 로그인을 통해 개인 웹사이트를 이용할 수 있습니다. <br> 
-| 회원가입 | 로그인 |
+| **회원가입** | **로그인** |
 |:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/310d2de6-dd0c-4d46-81ae-850ed263000c" width="300"/> | <img src="https://github.com/user-attachments/assets/a65ff3f5-d600-4d2c-afe8-069e43735ec4" width="300"/> |
 
@@ -37,9 +37,9 @@
 
 
 ✔ **문화 예술 콘텐츠 맞춤 추천**: 키워드 검색을 통해 맞춤 OTT 콘텐츠를 추천 받을 수 있습니다. (ChatGPT 활용)
-|<img src="https://github.com/user-attachments/assets/c6a9c78c-44e3-42e2-b244-975114925b1a" width="300"/>|
-|:---:|
 |콘텐츠 추천|
+|:---:|
+|<img src="https://github.com/user-attachments/assets/c6a9c78c-44e3-42e2-b244-975114925b1a" width="300"/>|
 
 ## server 파일 설명
 ✔ server/config/dev.js은 MongoDB URI를 설정합니다. (해당 파일은 .gitignore파일로 가려져있음) <br>
