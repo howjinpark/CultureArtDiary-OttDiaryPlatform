@@ -21,12 +21,38 @@
 |:---:|
 |다이어리 작성|
 
+|<img src="https://github.com/user-attachments/assets/94c8c149-66aa-4242-91f5-9252afe9b31b" width="300"/>|
+|:---:|
+|다이어리 수정|
 
 
 ✔ **문화 예술 콘텐츠 탐색**: 추천하는 다양한 OTT 콘텐츠를 탐색하고 정보를 제공 받을 수 있습니다. <br>
+|<img src="https://github.com/user-attachments/assets/65d721fc-95d9-4f84-afa9-7a057214d475" width="300"/>|
+|:---:|
+|콘텐츠 탐색|
+
+|<img src="https://github.com/user-attachments/assets/6ed6a9a3-264b-4a67-8670-9168400d94ca" width="300"/>|
+|:---:|
+|콘텐츠 상세정보|
+
 ✔ **캘린더 관리**: 캘린더를 통해 원하는 콘텐츠 알림을 받고 일정 관리를 할 수 있습니다. <br>
+|<img src="https://github.com/user-attachments/assets/d7a26840-08ea-4187-a852-d4789f1703a7" width="300"/>|
+|:---:|
+|캘린더|
+
 ✔ **개인 프로필 관리**: 개인 프로필을 만들고 관심사를 설정할 수 있습니다. <br>
+|<img src="https://github.com/user-attachments/assets/063f6e0e-9399-46e4-884b-8c46b2176ae1" width="300"/>|
+|:---:|
+|프로필|
+
+|<img src="https://github.com/user-attachments/assets/05bfe17c-13a7-4c69-90d0-4fd3874d1e5f" width="300"/>|
+|:---:|
+|프로필 수정|
+
 ✔ **문화 예술 콘텐츠 맞춤 추천**: 키워드 검색을 통해 맞춤 OTT 콘텐츠를 추천 받을 수 있습니다. (ChatGPT 활용)
+|<img src="https://github.com/user-attachments/assets/c6a9c78c-44e3-42e2-b244-975114925b1a" width="300"/>|
+|:---:|
+|콘텐츠 추천|
 
 ## server 파일 설명
 ✔ server/config/dev.js은 MongoDB URI를 설정합니다. (해당 파일은 .gitignore파일로 가려져있음) <br>
