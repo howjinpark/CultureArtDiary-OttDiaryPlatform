@@ -26,10 +26,9 @@
 
 <br><br> 
 ✔ **캘린더 관리**: 캘린더를 통해 원하는 콘텐츠 알림을 받고 일정 관리를 할 수 있습니다. 
-|<img src="https://github.com/user-attachments/assets/d7a26840-08ea-4187-a852-d4789f1703a7" width="300"/>|
-|:---:|
 |캘린더|
-
+|:---:|
+|<img src="https://github.com/user-attachments/assets/d7a26840-08ea-4187-a852-d4789f1703a7" width="300"/>|
 <br><br> 
 ✔ **개인 프로필 관리**: 개인 프로필을 만들고 관심사를 설정할 수 있습니다. 
 | 프로필 | 프로필 수정 |
