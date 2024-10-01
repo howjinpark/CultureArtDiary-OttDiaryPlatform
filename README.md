@@ -8,7 +8,7 @@
 
 ## 주요 기능
 ✔ **회원가입 및 로그인**: 회원 가입 및 로그인을 통해 개인 웹사이트를 이용할 수 있습니다. <br> <br>
-|<img src="https://github.com/user-attachments/assets/310d2de6-dd0c-4d46-81ae-850ed263000c" width="300"/>| 
+|<img src="https://github.com/user-attachments/assets/310d2de6-dd0c-4d46-81ae-850ed263000c" width="300" style="float:left; margin-right:10px;"/>| 
 |:---:|
 |회원가입|
 
