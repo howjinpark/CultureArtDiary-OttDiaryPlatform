@@ -17,13 +17,9 @@
 |로그인|
 
 ✔ **개인 다이어리 작성 및 수정**: 다른 사람들의 감상 후기를 확인하고 내 후기도 다른 사람과 공유할 수 있습니다. <br>
-|<img src="https://github.com/user-attachments/assets/c47512e2-c656-450f-86a9-b8b51d269a62" width="300"/>|
-|:---:|
-|다이어리 작성|
-
-|<img src="https://github.com/user-attachments/assets/94c8c149-66aa-4242-91f5-9252afe9b31b" width="300"/>|
-|:---:|
-|다이어리 수정|
+| 다이어리 작성 | 다이어리 수정 |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/c47512e2-c656-450f-86a9-b8b51d269a62" width="300"/> | <img src="https://github.com/user-attachments/assets/94c8c149-66aa-4242-91f5-9252afe9b31b" width="300"/> |
 
 
 ✔ **문화 예술 콘텐츠 탐색**: 추천하는 다양한 OTT 콘텐츠를 탐색하고 정보를 제공 받을 수 있습니다. <br>
